@@ -37,7 +37,7 @@ def fsm_step(msg):
     state machine:
         0: jugement ID. When id = 0x100, trigger 1 state
         1: record file name and crate file. When id = 0x200, trigger 2 state
-        2: 
+        2: write data and close file. when id = 0x100, trigger 1 state
     '''
 
     global state
