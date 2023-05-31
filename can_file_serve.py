@@ -3,6 +3,7 @@ from CAN import *
 import time
 import struct
 import os
+
 ch1 = 0
 ch2 = 0
 kvaser_open = 1
@@ -12,6 +13,9 @@ f = None
 
 
 def record_file_name(msg):
+    '''
+    Convert ASCll to string
+    '''
     ch = []
     for i in msg:
         if i == 0:
@@ -85,23 +89,13 @@ def fsm_step(msg):
            
 
 
-def record_file_name(msg):
-    ch = []
-    for i in msg:
-        if i == 0:
-            ch.append(' ')
-            return ''.join(ch)
-        else:
-            ch.append(chr(i))
-    return ''.join(ch)
-
 
 
 clear_buffer(kvaser_open, ch1, ch2)
 open_can(kvaser_open, ch1, ch2)
 
 while True:
-    
+
     msg_collect = receive_can(kvaser_open, ch1, ch2)
     for msg_solo in msg_collect:
         if isinstance(msg_solo, list) and msg_solo !=[]:
